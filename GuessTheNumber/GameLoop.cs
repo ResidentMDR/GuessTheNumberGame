@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.Design;
+﻿using System.Diagnostics;
 
 namespace GuessTheNumber
 {
@@ -6,12 +6,22 @@ namespace GuessTheNumber
     {
         private int guessNumber = 0;
         RandomNumberService rng = new RandomNumberService();
+        Stopwatch stopwatch = new Stopwatch();
 
         public void Start()
         {
             do
             {
                 var userInput = new UserInput();
+
+                stopwatch.Start();
+
+                if (!userInput.InputConverter())
+                {
+                    Console.WriteLine("Wrong Input");
+                    continue;
+                }
+
                 guessNumber = userInput.Guess;
 
                 if (guessNumber < rng.CorrectNumber)
@@ -27,7 +37,9 @@ namespace GuessTheNumber
 
             if (guessNumber == rng.CorrectNumber)
             {
+                stopwatch.Stop();
                 Console.WriteLine($"Congratulations! In {UserInput.Attempts} attempts" +
+                    $" and in {Math.Round(stopwatch.Elapsed.TotalSeconds, 2)} seconds" +
                     $" You just guessed the correct number: {rng.CorrectNumber.ToString()}");
             }
         }

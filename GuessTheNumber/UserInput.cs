@@ -3,7 +3,6 @@
     public UserInput()
     {
         StringGuess = Console.ReadLine();
-        InputConverter();
     }
     public int Guess 
     { 
@@ -16,15 +15,16 @@
     private int _guess;
     public string? StringGuess { get; set; }
 
-    public void InputConverter()
+    public bool InputConverter()
     {
         if (!Int32.TryParse(StringGuess, out _guess))
         {
-            Console.WriteLine("Wrong input");
+            return false;
         }
         else
         {
             Attempts++;
+            return true;
         }
     }
 }
