@@ -44,18 +44,15 @@ namespace GuessTheNumber
 
         private void GameRunning()
         {
-            var validator = new UserInputValidator();
-            var userInput = new UserInput();
-            UserInput.Attempts = 0;
-
             do
             {
-                userInput.StringGuess = Console.ReadLine();
-                ValidationResult result = validator.Validate(userInput);
+                var userInput = new UserInput();
+                userInput.InputConverter();
                 guessNumber = userInput.Guess;
+
                 stopwatch.Start();
 
-                if (!userInput.InputConverter() || !result.IsValid)
+                if (!userInput.InputConverter() || userInput.Guess > 100 || userInput.Guess < 1)
                 {
                     Console.WriteLine("Wrong Input");
                     continue;
@@ -63,18 +60,23 @@ namespace GuessTheNumber
 
                 if (guessNumber < rng.CorrectNumber)
                 {
-                    Console.WriteLine($"The correct number is higher... {rng.CorrectNumber}");
+                    Console.WriteLine($"The correct number is higher...");
+                    UserInput.Attempts++;
                 }
                 else if (guessNumber > rng.CorrectNumber)
                 {
-                    Console.WriteLine($"The correct number is lower... {rng.CorrectNumber}");
+                    Console.WriteLine($"The correct number is lower...");
+                    UserInput.Attempts++;
                 }
             }
             while (guessNumber != rng.CorrectNumber);
 
             if (guessNumber == rng.CorrectNumber)
             {
+                UserInput.Attempts++;
+
                 stopwatch.Stop();
+
                 totalAttempts.Add(UserInput.Attempts);
                 currentAttemptTime = Math.Round(stopwatch.Elapsed.TotalSeconds, 2);
 

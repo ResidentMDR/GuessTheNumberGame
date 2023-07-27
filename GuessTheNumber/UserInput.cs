@@ -4,7 +4,7 @@
     {
         public UserInput()
         {
-
+            StringGuess = Console.ReadLine();
         }
 
         public int Guess
@@ -26,7 +26,6 @@
             }
             else
             {
-                Attempts++;
                 return true;
             }
         }
