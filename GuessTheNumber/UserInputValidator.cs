@@ -6,15 +6,10 @@ namespace GuessTheNumber
     {
         public UserInputValidator()
         {
-            //RuleFor(x => x.Guess).NotEmpty();
-            //RuleFor(x => x.Guess).LessThanOrEqualTo(100);
-            //RuleFor(x => x.Guess).GreaterThanOrEqualTo(1);
-            //RuleFor(x => x.StringGuess).NotEmpty();
+            RuleFor(x => x.Guess).NotEmpty();
+            RuleFor(x => x.StringGuess).NotEmpty();
+            RuleFor(x => x.Guess).LessThanOrEqualTo(100);
+            RuleFor(x => x.Guess).GreaterThanOrEqualTo(1);
         }
-
-        //private bool BeAValidPostcode(string postcode)
-        //{
-        //    // custom postcode validating logic goes here
-        //}
     }
 }

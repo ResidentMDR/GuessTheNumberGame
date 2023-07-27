@@ -1,30 +1,34 @@
-﻿public class UserInput
+﻿namespace GuessTheNumber
 {
-    public UserInput()
+    public class UserInput
     {
-        StringGuess = Console.ReadLine();
-    }
-    public int Guess 
-    { 
-        get => _guess;
-        set => _guess = value;
-    }
-
-    public static int Attempts { get; set; } = 0;
-
-    private int _guess;
-    public string? StringGuess { get; set; }
-
-    public bool InputConverter()
-    {
-        if (!Int32.TryParse(StringGuess, out _guess))
+        public UserInput()
         {
-            return false;
+
         }
-        else
+
+        public int Guess
         {
-            Attempts++;
-            return true;
+            get => _guess;
+            set => _guess = value;
+        }
+
+        public static int Attempts { get; set; } = 0;
+
+        private int _guess;
+        public string? StringGuess { get; set; }
+
+        public bool InputConverter()
+        {
+            if (!Int32.TryParse(StringGuess, out _guess))
+            {
+                return false;
+            }
+            else
+            {
+                Attempts++;
+                return true;
+            }
         }
     }
 }
