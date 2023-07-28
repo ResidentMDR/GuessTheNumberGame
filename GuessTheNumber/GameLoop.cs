@@ -6,10 +6,11 @@ namespace GuessTheNumber
 {
     public class GameLoop
     {
-        private int guessNumber = 0;
+        private int _guess;
         private List<int> totalAttempts = new List<int>();
         private double bestTime;
         private double currentAttemptTime;
+        private const double UNBEATABLE_RECORD = 120;
 
         RandomNumberService rng = new RandomNumberService();
         Stopwatch stopwatch = new Stopwatch();
@@ -21,7 +22,7 @@ namespace GuessTheNumber
             {
                 string json = File.ReadAllText("game_results.json");
                 GameResult previousGameResult = JsonSerializer.Deserialize<GameResult>(json);
-                currentBestTime = previousGameResult.BestTime;
+                currentBestTime = previousGameResult.BestTime > 0 ? previousGameResult.BestTime : UNBEATABLE_RECORD;
                 totalAttempts = previousGameResult.Attempts;
             }
 
@@ -49,33 +50,35 @@ namespace GuessTheNumber
             do
             {
                 var userInput = new UserInput();
-                userInput.InputConverter();
-                guessNumber = userInput.Guess;
+                userInput.InputMessage = Console.ReadLine();
+
+                _guess = userInput.Convert(userInput.InputMessage);
+                userInput.Guess = _guess;
 
                 result = validator.Validate(userInput);
 
                 stopwatch.Start();
 
-                if (!userInput.InputConverter() || !result.IsValid)
+                if (!result.IsValid)
                 {
                     Console.WriteLine("Wrong Input");
                     continue;
                 }
 
-                if (guessNumber < rng.CorrectNumber)
+                if (_guess < rng.CorrectNumber)
                 {
-                    Console.WriteLine($"The correct number is higher...");
+                    Console.WriteLine($"The correct number is higher... {rng.CorrectNumber}");
                     UserInput.Attempts++;
                 }
-                else if (guessNumber > rng.CorrectNumber)
+                else if (_guess > rng.CorrectNumber)
                 {
-                    Console.WriteLine($"The correct number is lower...");
+                    Console.WriteLine($"The correct number is lower... {rng.CorrectNumber}");
                     UserInput.Attempts++;
                 }
             }
-            while (guessNumber != rng.CorrectNumber);
+            while (_guess != rng.CorrectNumber);
 
-            if (guessNumber == rng.CorrectNumber)
+            if (_guess == rng.CorrectNumber)
             {
                 UserInput.Attempts++;
 

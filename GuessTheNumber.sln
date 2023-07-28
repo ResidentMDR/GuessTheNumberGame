@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33801.468
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GuessTheNumber", "GuessTheNumber\GuessTheNumber.csproj", "{234247BC-9C8D-4551-A72A-9BDC0D363BBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuessTheNumber", "GuessTheNumber\GuessTheNumber.csproj", "{234247BC-9C8D-4551-A72A-9BDC0D363BBE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GuessTheNumberTests", "GuessTheNumberTests\GuessTheNumberTests.csproj", "{AE72F285-CBFE-4A27-B703-3DC67A4D24FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{234247BC-9C8D-4551-A72A-9BDC0D363BBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{234247BC-9C8D-4551-A72A-9BDC0D363BBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{234247BC-9C8D-4551-A72A-9BDC0D363BBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE72F285-CBFE-4A27-B703-3DC67A4D24FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE72F285-CBFE-4A27-B703-3DC67A4D24FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE72F285-CBFE-4A27-B703-3DC67A4D24FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE72F285-CBFE-4A27-B703-3DC67A4D24FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,12 +1,14 @@
-﻿namespace GuessTheNumber
+﻿using GuessTheNumber.Interfaces;
+
+namespace GuessTheNumber
 {
-    public class UserInput
+    public class UserInput : IUserInput
     {
         public UserInput()
         {
-            StringGuess = Console.ReadLine();
+            //InputMessage = Console.ReadLine();
         }
-
+        
         public int Guess
         {
             get => _guess;
@@ -16,17 +18,17 @@
         public static int Attempts { get; set; } = 0;
 
         private int _guess;
-        public string? StringGuess { get; set; }
+        public string? InputMessage { get; set; }
 
-        public bool InputConverter()
+        public int Convert(string input)
         {
-            if (!Int32.TryParse(StringGuess, out _guess))
+            if(Int32.TryParse(input, out _guess))
             {
-                return false;
+                return _guess;
             }
             else
             {
-                return true;
+                return -1;
             }
         }
     }
