@@ -44,15 +44,19 @@ namespace GuessTheNumber
 
         private void GameRunning()
         {
+            UserInputValidator validator = new UserInputValidator();
+            ValidationResult result = new ValidationResult();
             do
             {
                 var userInput = new UserInput();
                 userInput.InputConverter();
                 guessNumber = userInput.Guess;
 
+                result = validator.Validate(userInput);
+
                 stopwatch.Start();
 
-                if (!userInput.InputConverter() || userInput.Guess > 100 || userInput.Guess < 1)
+                if (!userInput.InputConverter() || !result.IsValid)
                 {
                     Console.WriteLine("Wrong Input");
                     continue;
